@@ -64,5 +64,9 @@ Route::get('/exportaciones/productos', [ExportacionController::class, 'exportarP
 Route::get('/exportaciones/clientes', [ExportacionController::class, 'exportarClientes'])->name('exportaciones.clientes');
 Route::get('/exportaciones/recompensas', [ExportacionController::class, 'exportarRecompensas'])->name('exportaciones.recompensas');
 
+Route::get('/profile', function () {
+    return 'Perfil en construcción';
+})->name('profile.edit');
+
 
 require __DIR__.'/auth.php';
