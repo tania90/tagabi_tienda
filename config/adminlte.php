@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Tagabi</b>PY',
-    'logo_img' => 'images/logo_tagabi.png',
+    'logo_img' => 'images/logo_tagabi.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'images/logo_tagabi.png',
+            'path' => 'images/logo_tagabi.jpg',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'images/logo_tagabi.png',
+            'path' => 'images/logo_tagabi.jpg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
