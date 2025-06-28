@@ -75,7 +75,7 @@ class DashboardController extends Controller
             ? number_format((($totalMesActual - $totalMesAnterior) / $totalMesAnterior) * 100, 1)
             : '100';
 
-        return view('dashboard', compact(
+return view('dashboard', compact(
     'ventasDelDia',
     'ventasDelMes',
     'productoTop',
@@ -90,6 +90,6 @@ class DashboardController extends Controller
     'totalMesActual',
     'variacionMes'
 ));
-// Forzado para Git
+// Commit for deploy test
     }
 }
