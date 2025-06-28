@@ -9,28 +9,28 @@
 @section('content')
 <div class="row">
     <div class="col-md-3">
-        <x-adminlte-info-box title="Ventas del día" text="{{ number_format($ventasDelDia, 0, ',', '.') }} Gs" icon="fas fa-calendar-day" theme="success"/>
+        <x-adminlte-info-box title="Ventas del día" text="{{ number_format($ventasDelDia ?? 0, 0, ',', '.') }} Gs" icon="fas fa-calendar-day" theme="success"/>
     </div>
     <div class="col-md-3">
-        <x-adminlte-info-box title="Ventas del mes" text="{{ number_format($ventasDelMes, 0, ',', '.') }} Gs" icon="fas fa-calendar-alt" theme="info"/>
+        <x-adminlte-info-box title="Ventas del mes" text="{{ number_format($ventasDelMes ?? 0, 0, ',', '.') }} Gs" icon="fas fa-calendar-alt" theme="info"/>
     </div>
     <div class="col-md-3">
-        <x-adminlte-info-box title="Top Producto" text="{{ $productoTop ? $productoTop->nombre : 'Sin datos' }}" icon="fas fa-box" theme="warning"/>
+        <x-adminlte-info-box title="Top Producto" text="{{ $productoTop->nombre ?? 'Sin datos' }}" icon="fas fa-box" theme="warning"/>
     </div>
     <div class="col-md-3">
-        <x-adminlte-info-box title="Total Clientes" text="{{ $totalClientes }}" icon="fas fa-users" theme="primary"/>
+        <x-adminlte-info-box title="Total Clientes" text="{{ $totalClientes ?? 0 }}" icon="fas fa-users" theme="primary"/>
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-md-3">
-        <x-adminlte-info-box title="Total en Stock" text="{{ $totalProductos }}" icon="fas fa-boxes" theme="secondary"/>
+        <x-adminlte-info-box title="Total en Stock" text="{{ $totalProductos ?? 0 }}" icon="fas fa-boxes" theme="secondary"/>
     </div>
     <div class="col-md-3">
-        <x-adminlte-info-box title="Cliente TOP comprador" text="{{ $clienteTop ? $clienteTop->nombre : 'Sin datos' }}" icon="fas fa-user-tie" theme="dark"/>
+        <x-adminlte-info-box title="Cliente TOP comprador" text="{{ $clienteTop->nombre ?? 'Sin datos' }}" icon="fas fa-user-tie" theme="dark"/>
     </div>
     <div class="col-md-3">
-        <x-adminlte-info-box title="Cliente con más puntos" text="{{ $clienteCanjeTop ? $clienteCanjeTop->nombre : 'Sin datos' }}" icon="fas fa-gift" theme="success"/>
+        <x-adminlte-info-box title="Cliente con más puntos" text="{{ $clienteCanjeTop->nombre ?? 'Sin datos' }}" icon="fas fa-gift" theme="success"/>
     </div>
 </div>
 
@@ -45,12 +45,12 @@
     <div class="card-body">
         <div class="d-flex">
             <p class="d-flex flex-column">
-                <span class="text-bold text-lg">Gs. {{ number_format($totalMesActual, 0, ',', '.') }}</span>
+                <span class="text-bold text-lg">Gs. {{ number_format($totalMesActual ?? 0, 0, ',', '.') }}</span>
                 <span>Ventas a lo largo del tiempo</span>
             </p>
             <p class="ml-auto d-flex flex-column text-right">
                 <span class="text-success">
-                    <i class="fas fa-arrow-up"></i> {{ $variacionMes }}%
+                    <i class="fas fa-arrow-up"></i> {{ $variacionMes ?? 0 }}%
                 </span>
                 <span class="text-muted">Desde el mes pasado</span>
             </p>
@@ -84,18 +84,18 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($ultimasVentas as $venta)
+                @forelse ($ultimasVentas ?? [] as $venta)
                     <tr>
-                        <td>{{ $venta->cliente->nombre }}</td>
-                        <td>{{ \Carbon\Carbon::parse($venta->fecha_venta)->format('d/m/Y') }}</td>
+                        <td>{{ $venta->cliente->nombre ?? 'Sin nombre' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($venta->fecha_venta ?? now())->format('d/m/Y') }}</td>
                         <td>
                             <ul>
-                                @foreach($venta->detalleVentas as $detalle)
-                                    <li>{{ $detalle->producto->nombre }} x {{ $detalle->cantidad }}</li>
+                                @foreach($venta->detalleVentas ?? [] as $detalle)
+                                    <li>{{ $detalle->producto->nombre ?? 'Producto eliminado' }} x {{ $detalle->cantidad ?? '?' }}</li>
                                 @endforeach
                             </ul>
                         </td>
-                        <td>{{ number_format($venta->total, 0, ',', '.') }} Gs</td>
+                        <td>{{ number_format($venta->total ?? 0, 0, ',', '.') }} Gs</td>
                     </tr>
                 @empty
                     <tr>
@@ -115,27 +115,14 @@
     const ventasChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($meses) !!},
+            labels: {!! json_encode($meses ?? []) !!},
             datasets: [
                 {
                     label: 'Monto Vendido (Gs)',
                     backgroundColor: '#007bff',
-                    data: {!! json_encode($totales) !!}
+                    data: {!! json_encode($totales ?? []) !!}
                 },
                 {
                     label: 'Cantidad de Ventas',
                     backgroundColor: '#d2d6de',
-                    data: {!! json_encode($cantidades) !!}
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    });
-</script>
-@endpush
+                    data: {!! json_encode($cantidades ?? [])_
