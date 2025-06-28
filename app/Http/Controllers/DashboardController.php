@@ -49,13 +49,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        // Datos para el gráfico (ventas del año actual por mes)
+        // Datos para el gráfico (ventas del año actual por mes - SQLite compatible)
         $ventasPorMes = Venta::selectRaw("CAST(strftime('%m', created_at) AS INTEGER) as mes, SUM(total) as total, COUNT(*) as cantidad")
-    ->whereRaw("strftime('%Y', created_at) = ?", [now()->year])
-    ->groupBy('mes')
-    ->orderBy('mes')
-    ->get();
-
+            ->whereRaw("strftime('%Y', created_at) = ?", [now()->year])
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->get();
 
         $meses = [];
         $totales = [];
@@ -68,29 +67,28 @@ class DashboardController extends Controller
             $cantidades[] = $mesData ? $mesData->cantidad : 0;
         }
 
-        // Cálculo de variación entre mes actual y anterior
+        // Variación mensual
         $mesActual = now()->month;
         $totalMesActual = $ventasPorMes->firstWhere('mes', $mesActual)?->total ?? 0;
         $totalMesAnterior = $ventasPorMes->firstWhere('mes', $mesActual - 1)?->total ?? 0;
         $variacionMes = $totalMesAnterior > 0
             ? number_format((($totalMesActual - $totalMesAnterior) / $totalMesAnterior) * 100, 1)
-            : '100';
+            : '0';
 
-return view('dashboard', compact(
-    'ventasDelDia',
-    'ventasDelMes',
-    'productoTop',
-    'totalClientes',
-    'totalProductos',
-    'clienteTop',
-    'clienteCanjeTop',
-    'ultimasVentas',
-    'meses',
-    'totales',
-    'cantidades',
-    'totalMesActual',
-    'variacionMes'
-));
-// Commit for deploy test
+        return view('dashboard', compact(
+            'ventasDelDia',
+            'ventasDelMes',
+            'productoTop',
+            'totalClientes',
+            'totalProductos',
+            'clienteTop',
+            'clienteCanjeTop',
+            'ultimasVentas',
+            'meses',
+            'totales',
+            'cantidades',
+            'totalMesActual',
+            'variacionMes'
+        ));
     }
 }
