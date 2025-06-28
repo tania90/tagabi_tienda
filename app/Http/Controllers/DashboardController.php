@@ -76,19 +76,20 @@ class DashboardController extends Controller
             : '100';
 
         return view('dashboard', compact(
-            'ventasDelDia',
-            'ventasDelMes',
-            'productoTop',
-            'totalClientes',
-            'totalProductos',
-            'clienteTop',
-            'clienteCanjeTop',
-            'ultimasVentas',
-            'meses',
-            'totales',
-            'cantidades',
-            'totalMesActual',
-            'variacionMes'
-        ));
+    'ventasDelDia',
+    'ventasDelMes',
+    'productoTop',
+    'totalClientes',
+    'totalProductos',
+    'clienteTop',
+    'clienteCanjeTop',
+    'ultimasVentas',
+    'meses',
+    'totales',
+    'cantidades',
+    'totalMesActual',
+    'variacionMes'
+));
+// Forzado para Git
     }
 }
