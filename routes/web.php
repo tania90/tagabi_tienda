@@ -11,7 +11,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ExportacionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 // Rutas protegidas por login
