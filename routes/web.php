@@ -17,9 +17,6 @@ Route::get('/', function () {
 // Rutas protegidas por login
 Route::middleware(['auth'])->group(function () {
     Route::resource('clientes', ClienteController::class);
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 });
 
 Route::resource('ventas', VentaController::class)->middleware(['auth']);
@@ -42,7 +39,8 @@ Route::post('password/update', [App\Http\Controllers\Auth\PasswordController::cl
 
 
 Route::resource('productos', \App\Http\Controllers\ProductoController::class)->middleware('auth');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+
 
 Route::get('clientes/{cliente}/historial', [App\Http\Controllers\ClienteController::class, 'historial'])->name('clientes.historial');
 Route::get('clientes/{cliente}', [ClienteController::class, 'show'])->name('clientes.show');
