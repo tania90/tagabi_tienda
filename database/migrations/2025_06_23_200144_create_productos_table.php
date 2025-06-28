@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('productos', function (Blueprint $table) {
-        $table->id();
-        $table->string('nombre');
-        $table->text('descripcion')->nullable();
-        $table->decimal('precio', 10, 2);
-        $table->integer('cantidad');  // Cambié 'stock' a 'cantidad'
-        $table->decimal('precio_costo', 10, 2)->nullable()->after('cantidad');
-        $table->decimal('precio_venta', 10, 2)->nullable()->after('precio_costo');
-        $table->integer('stock_minimo')->default(1)->after('cantidad');
-        $table->string('imagen')->nullable()->after('color');
-        $table->timestamps();
-    });
+        Schema::create('productos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio', 10, 2);
+            $table->integer('cantidad');
+            $table->decimal('precio_costo', 10, 2)->nullable();
+            $table->decimal('precio_venta', 10, 2)->nullable();
+            $table->integer('stock_minimo')->default(1);
+            $table->string('color')->nullable(); // Asegurate de incluir esta columna si vas a usarla
+            $table->string('imagen')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
