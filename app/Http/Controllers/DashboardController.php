@@ -50,11 +50,12 @@ class DashboardController extends Controller
             ->get();
 
         // Datos para el gráfico (ventas del año actual por mes)
-        $ventasPorMes = Venta::selectRaw('MONTH(created_at) as mes, SUM(total) as total, COUNT(*) as cantidad')
-            ->whereYear('created_at', now()->year)
-            ->groupBy('mes')
-            ->orderBy('mes')
-            ->get();
+        $ventasPorMes = Venta::selectRaw("CAST(strftime('%m', created_at) AS INTEGER) as mes, SUM(total) as total, COUNT(*) as cantidad")
+    ->whereRaw("strftime('%Y', created_at) = ?", [now()->year])
+    ->groupBy('mes')
+    ->orderBy('mes')
+    ->get();
+
 
         $meses = [];
         $totales = [];
