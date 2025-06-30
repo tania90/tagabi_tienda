@@ -15,7 +15,7 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Tania Admin',
                 'email' => 'admin@tagabi.com',
-                'password' => Hash::make('admin123'), // Cambiá luego por seguridad
+                'password' => Hash::make('12345678'), // Cambiá luego por seguridad
                 'rol' => 'admin' // si tenés un campo "rol"
             ]
         );
