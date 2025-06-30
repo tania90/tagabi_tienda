@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'TagabiPY',
+    'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Tagabi</b>PY',
-    'logo_img' => 'images/logo_tagabi.jpg',
-    'logo_img_class' => 'brand-image elevation-3',
+    'logo' => '<b>Admin</b>LTE',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'TagabiPY',
+    'logo_img_alt' => 'Admin Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'images/logo_tagabi.jpg',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'images/logo_tagabi.jpg',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline bg-light',
+    'classes_auth_card' => 'card-outline card-primary',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-light',
+    'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
     |--------------------------------------------------------------------------
@@ -298,84 +298,101 @@ return [
     |
     */
 
-    // Dentro del arreglo 'menu', reemplaza el actual con este:
-'menu' => [
-    // Barra superior (navbar)
-    [
-        'type' => 'navbar-search',
-        'text' => 'Buscar',
-        'topnav_right' => true,
-    ],
-    [
-        'type' => 'fullscreen-widget',
-        'topnav_right' => true,
-    ],
+    'menu' => [
+        // Navbar items:
+        [
+            'type' => 'navbar-search',
+            'text' => 'search',
+            'topnav_right' => true,
+        ],
+        [
+            'type' => 'fullscreen-widget',
+            'topnav_right' => true,
+        ],
 
-    // Menú lateral (sidebar)
-    [
-        'type' => 'sidebar-menu-search',
-        'text' => 'Buscar',
-    ],
-    ['header' => 'NAVEGACIÓN PRINCIPAL'],
-    [
-        'text' => 'Dashboard',
-        'route' => 'dashboard',
-        'icon' => 'fas fa-tachometer-alt',
-    ],
-    [
-        'text' => 'Clientes',
-        'route' => 'clientes.index',
-        'icon' => 'fas fa-users',
-    ],
-    [
-        'text' => 'Ventas',
-        'icon' => 'fas fa-shopping-cart',
-        'submenu' => [
-            [
-                'text' => 'Historial de ventas',
-                'route' => 'ventas.index',
-            ],
-            [
-                'text' => 'Nueva venta',
-                'route' => 'ventas.create',
+        // Sidebar items:
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',
+        ],
+        [
+            'text' => 'blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
+        ],
+        [
+            'text' => 'pages',
+            'url' => 'admin/pages',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'success',
+        ],
+        ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'change_password',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'multilevel',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                        ],
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
             ],
         ],
-    ],
-    [
-        'text' => 'Productos',
-        'route' => 'productos.index',
-        'icon' => 'fas fa-boxes',
-    ],
-    [
-        'text' => 'Recompensas',
-        'route' => 'recompensas.index',
-        'icon' => 'fas fa-gift',
-    ],
-    [
-        'text' => 'Exportaciones',
-        'icon' => 'fas fa-file-export',
-        'submenu' => [
-            [
-                'text' => 'Productos',
-                'route' => 'exportaciones.productos',
-            ],
-            [
-                'text' => 'Clientes',
-                'route' => 'exportaciones.clientes',
-            ],
-            [
-                'text' => 'Recompensas',
-                'route' => 'exportaciones.recompensas',
-            ],
+        ['header' => 'labels'],
+        [
+            'text' => 'important',
+            'icon_color' => 'red',
+            'url' => '#',
+        ],
+        [
+            'text' => 'warning',
+            'icon_color' => 'yellow',
+            'url' => '#',
+        ],
+        [
+            'text' => 'information',
+            'icon_color' => 'cyan',
+            'url' => '#',
         ],
     ],
-    [
-        'text' => 'Cambiar contraseña',
-        'url' => 'password/change',
-        'icon' => 'fas fa-lock',
-    ],
-],
-
 
     /*
     |--------------------------------------------------------------------------
